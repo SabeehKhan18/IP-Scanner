@@ -20,8 +20,8 @@ import java.net.UnknownHostException;
 public class Main {
 
 	public static void main(String[] args) throws SecurityException, UnknownHostException {
-		String ip_start = "137.112.153.65";
-		String ip_final = "137.112.153.68";
+		String ip_start = "137.112.152.254";
+		String ip_final = "137.112.153.3";
 		
 		String ip = ip_start;
 		
@@ -43,14 +43,19 @@ public class Main {
 			ip_next[3] += 1;
 			
 			// If reached IP bounds, increase next upper byte
-			if (ip_next[3] == 256)
+			if (ip_next[3] == 256) {
 				ip_next[2] += 1;
-			
-			if (ip_next[2] == 256)
+				ip_next[3] = 0;
+			}
+			if (ip_next[2] == 256) {
 				ip_next[1] += 1;
+				ip_next[2] = 0;
+			}
 			
-			if (ip_next[1] == 256)
+			if (ip_next[1] == 256) {
 				ip_next[0] += 1;
+				ip_next[1] = 0;
+			}
 			
 			// Convert next ip back to string
 			String conv = "";
