@@ -1,5 +1,3 @@
-import java.io.IOException;
-import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 /**
@@ -20,16 +18,14 @@ import java.net.UnknownHostException;
 public class Main {
 
 	public static void main(String[] args) throws SecurityException, UnknownHostException {
-		String ip_start = "137.112.152.254";
-		String ip_final = "137.112.153.3";
+		String ip_start = "192.168.1.1";
+		String ip_final = "192.168.1.255";
 		
 		String ip = ip_start;
 		
 		while (!ip.equals(ip_final)) {
-			// InetAddress data
-			InetAddress addr = InetAddress.getByName(ip);
-			System.out.print("IP: "+ addr.getHostAddress() +", Hostname: " + addr.getHostName());
-			System.out.println();
+			Thread scan = new Thread(new Scanner(ip));
+			scan.start();
 			
 			// Convert to array to increment
 			int[] ip_next = new int[4];
@@ -59,7 +55,6 @@ public class Main {
 			
 			// Convert next ip back to string
 			String conv = "";
-			int count = 0;
 
 	        for(int i : ip_next) {
 	            conv += Integer.toString(i) + ".";
